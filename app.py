@@ -53,17 +53,17 @@ def movies_by_genre(genre):
         }
     return response
 
-@app.route("/update-movie/<id_movie_>", methods=['PUT'])
-def update_movie(id_movie_):
+@app.route("/update-movie/", methods=['PUT'])
+def update_movie():
     response = {}
     id_movie = request.json['movieId']
     name = request.json['name']
     genre = request.json['genre']
-    if (movie_handler.update_movie(id_movie_, name, genre)):
+    if (movie_handler.update_movie(id_movie, name, genre)):
         response={
             "state": 200,
             "message": "Pelicula actualizada con exito",
-            "movie": movie_handler.get_movie(id_movie_)
+            "movie": movie_handler.get_movie(id_movie)
         }
     else:
         response={
