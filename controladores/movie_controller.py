@@ -6,6 +6,15 @@ class movie_controller:
     def __init__(self):
         self.movies = []
 
+    def get_movie(self, id_movie):
+        for movie in self.movies:
+            if movie.id_movie == id_movie:
+                return {
+                    "movieId": movie.id_movie,
+                    "name": movie.name,
+                    "genre": movie.genre
+                }
+
     def add_movie(self, id_movie, name, genre):
         for movie_ in self.movies:
             if movie_.name.lower() == name.lower() or movie_.id_movie == id_movie:
@@ -24,3 +33,6 @@ class movie_controller:
     
     def movies_by_genre(self, genre):
         return json.dumps([movie.dump() for movie in self.movies if movie.genre.lower() == genre.lower()], indent = 4)
+    
+    def update_movie(self,):
+        pass

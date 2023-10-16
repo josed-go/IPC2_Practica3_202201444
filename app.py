@@ -26,7 +26,8 @@ def new_movie():
     if (movie_handler.add_movie(id_movie, name, genre)):
         response={
             "state": 200,
-            "message": "Pelicula agregada con exito"
+            "message": "Pelicula agregada con exito",
+            "movie": movie_handler.get_movie(id_movie)
         }
     else:
         response={
