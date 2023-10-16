@@ -36,6 +36,10 @@ def new_movie():
         }
     return response
 
+@app.route("/all-movies", methods = ['GET'])
+def all_movies():
+    return movie_handler.get_movies()
+
 @app.route("/all-movies-by-genre/<genre>", methods = ['GET'])
 def movies_by_genre(genre):
     movies = movie_handler.movies_by_genre(genre)
@@ -46,6 +50,25 @@ def movies_by_genre(genre):
         response={
             "state": "!!!",
             "message": "No existen peliculas con ese genero"
+        }
+    return response
+
+@app.route("/update-movie/<id_movie_>", methods=['PUT'])
+def update_movie(id_movie_):
+    response = {}
+    id_movie = request.json['movieId']
+    name = request.json['name']
+    genre = request.json['genre']
+    if (movie_handler.update_movie(id_movie_, name, genre)):
+        response={
+            "state": 200,
+            "message": "Pelicula actualizada con exito",
+            "movie": movie_handler.get_movie(id_movie_)
+        }
+    else:
+        response={
+            "state": "Error",
+            "message": "Error al actualizar la pelicula"
         }
     return response
 
